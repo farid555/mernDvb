@@ -4,28 +4,35 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Contact from './components/Contact';
 import About from './components/About';
-import { Route } from 'react-router-dom';
+import Errorpage from './components/Errorpage'
+import { Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/contact">
-        <Contact />
-      </Route>
-      <Route path="/about" >
-        <About />
-      </Route>
-      <Route path="/signup" >
-        <Signup />
-      </Route>
-      <Route path="/login" >
-        <Login />
-      </Route>
+
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/about" >
+          <About />
+        </Route>
+        <Route path="/signup" >
+          <Signup />
+        </Route>
+        <Route path="/login" >
+          <Login />
+        </Route>
+        <Route>
+          <Errorpage />
+        </Route>
+      </Switch>
     </div>
   );
 }
