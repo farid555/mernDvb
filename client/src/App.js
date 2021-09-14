@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Contact from './components/Contact';
 import About from './components/About';
 import { Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (
