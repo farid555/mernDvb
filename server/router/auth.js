@@ -2,14 +2,17 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const authenticate = require("../middleware/authenticate");
+
+
+
 require('../db/conn');
 const User = require('../model/userSchema');
 
 
+//about
 
-router.get('/', (req, res) => {
-    res.send(` Hello from the surver router js`);
-});
+
 
 //using promises
 // router.post('/register', (req, res) => {
@@ -67,6 +70,7 @@ router.post('/register', async (req, res) => {
 router.post('/signin', async (req, res) => {
 
     try {
+
         let token;
         const { email, password } = req.body;
         if (!email || !password) {
@@ -75,7 +79,7 @@ router.post('/signin', async (req, res) => {
         const userLogin = await User.findOne({ email: email });
 
         if (userLogin) {
-            const ismatch = await bcrypt.compare(password, userLogin.password);
+            const isMatch = await bcrypt.compare(password, userLogin.password);
 
             token = await userLogin.generateAuthToken();
             console.log(token);
@@ -86,7 +90,7 @@ router.post('/signin', async (req, res) => {
             }
 
 
-            if (!ismatch) {
+            if (!isMatch) {
                 return res.status(400).json({ error: 'invalid credentials password' })
 
             } else {
@@ -104,6 +108,11 @@ router.post('/signin', async (req, res) => {
 
     }
 
-})
+});
+router.get('/about', authenticate, (req, res) => {
+    //console.log(req.rootUser);
+    res.send(req.rootUser);
+});
+
 
 module.exports = router;

@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 const dotenv = require("dotenv");
+var cookieParser = require('cookie-parser')
+
+app.use(cookieParser())
+
 
 dotenv.config({ path: './config.env' });
 
