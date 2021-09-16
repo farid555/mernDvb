@@ -113,6 +113,36 @@ router.get('/about', authenticate, (req, res) => {
     //console.log(req.rootUser);
     res.send(req.rootUser);
 });
+//get user data for contact
+router.get('/getdata', authenticate, (req, res) => {
+    //console.log(req.rootUser);
+    res.send(req.rootUser);
+});
+
+
+//contact us page
+router.post('/contact', authenticate, async (req, res) => {
+    try {
+        const { name, email, phone, message } = req.body;
+        if (!name || !email || !phone || !message) {
+            console.log("error in the contact form")
+            return res.json({ error: "Plz filled the contact form" });
+        }
+
+        const userContact = await User.findOne({ _id: req.userID })
+        if (userContact) {
+            const userMessage = await userContact.addMessage(name, email, phone, message);
+            await userContact.save();
+            res.status(201).json({ message: "user Contact successfully" })
+        }
+
+    } catch (error) {
+        console.log(error);
+
+    }
+
+});
+
 
 
 module.exports = router;
