@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Contact from './components/Contact';
 import About from './components/About';
 import Errorpage from './components/Errorpage'
+import Logout from './components/Logout'
 import { Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/login" >
           <Login />
+        </Route>
+        <Route path="/logout" >
+          <Logout />
         </Route>
         <Route>
           <Errorpage />
