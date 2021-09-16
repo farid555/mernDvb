@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 const Home = () => {
 
     const [userName, setUserName] = useState('');
+    const [show, setShow] = useState(false);
+
 
     const userHomePage = async () => {
         try {
@@ -18,6 +20,7 @@ const Home = () => {
             const data = await res.json();
             console.log(data);
             setUserName(data.name);
+            setShow(true);
 
 
             if (!res.status === 200) {
@@ -39,7 +42,7 @@ const Home = () => {
         <div>
             <p className="pt-5">Welcome</p>
             <h1>{userName}</h1>
-            <h1>I am Mern Developer...</h1>
+            <h2>{show ? 'Happy, to see you back 😎' : 'I am Mern Developer...'}</h2>
         </div>
     )
 }
