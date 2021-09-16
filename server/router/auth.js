@@ -142,6 +142,15 @@ router.post('/contact', authenticate, async (req, res) => {
     }
 
 });
+//Hello MyLogout
+
+router.get('/logout', (req, res) => {
+    console.log('I am just Logout...');
+    res.clearCookie('jwtoken', { path: '/' });
+    res.status(200).send('User logout');
+
+});
+
 
 
 
