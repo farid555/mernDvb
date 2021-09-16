@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import faridPic from "../images/farid.jpg"
 import "./about.css"
@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 const About = () => {
 
     const history = useHistory();
+    const [userData, setUserData] = useState({});
 
     const callAboutPage = async () => {
         try {
@@ -21,6 +22,8 @@ const About = () => {
             });
             const data = await res.json();
             console.log(data);
+            setUserData(data);
+
 
             if (!res.status === 200) {
                 const error = new Error(res.error);
@@ -52,7 +55,7 @@ const About = () => {
                         </div>
                         <div className="col-md-6">
                             <div className="profile-head" />
-                            <h5>Farid Zaman</h5>
+                            <h5>{userData.name}</h5>
                             <h6>Web Developer...</h6>
                             <p className="profile-rating mt-3 mb-5">RANKINGS | <span> 1/10</span></p>
                             <div>
@@ -94,22 +97,22 @@ const About = () => {
                             <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <label> User ID </label>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <label> +3932949328 </label>
-                                    </div>
-                                    <div className="col-md-6">
                                         <label> User Name </label>
                                     </div>
                                     <div className="col-md-6">
-                                        <label> +3932949328 </label>
+                                        <label> {userData.name} </label>
                                     </div>
                                     <div className="col-md-6">
-                                        <label> User ID </label>
+                                        <label> User Email</label>
                                     </div>
                                     <div className="col-md-6">
-                                        <label> +3932949328 </label>
+                                        <label> {userData.email} </label>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <label> User Phone</label>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <label>{userData.phone} </label>
                                     </div>
                                     <div className="col-md-6">
                                         <label> User Name </label>
